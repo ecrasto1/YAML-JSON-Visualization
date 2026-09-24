@@ -1,0 +1,27 @@
+{
+  "name": "jsoncrack-core",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Standalone YAML/JSON to interactive graph visualizer, extracted from jsoncrack.com",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "js-yaml": "5.4.2",
+    "jsonc-parser": "3.3.1",
+    "jsoncrack-react": "^1.0.5",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "^6.0.5",
+    "typescript": "^5.9.3",
+    "vite": "^8.2.1"
+  }
+}
