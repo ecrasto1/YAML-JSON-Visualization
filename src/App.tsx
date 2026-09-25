@@ -29,6 +29,7 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
   const [depth, setDepth] = useState(DEFAULT_DEPTH);
   const [manualOverrides, setManualOverrides] = useState<Record<string, boolean>>({});
+  const [expandedRoots, setExpandedRoots] = useState<ReadonlySet<string>>(new Set());
 
   useEffect(() => {
     try {
@@ -41,21 +42,34 @@ export default function App() {
 
   useEffect(() => {
     setManualOverrides({});
+    setExpandedRoots(new Set());
   }, [depth, json]);
 
   const collapsedPaths = useMemo(() => {
     if (typeof json !== "object" || json === null) return [];
-    const collapsedSet = new Set(computeDepthCollapsedPaths(json, depth));
+    const collapsedSet = new Set(computeDepthCollapsedPaths(json, depth, expandedRoots));
     for (const [key, collapsed] of Object.entries(manualOverrides)) {
       if (collapsed) collapsedSet.add(key);
       else collapsedSet.delete(key);
     }
     return [...collapsedSet];
-  }, [json, depth, manualOverrides]);
+  }, [json, depth, expandedRoots, manualOverrides]);
 
+  // Expanding a node grants its subtree a fresh depth budget (via
+  // expandedRoots) instead of only revealing one level, so a single click
+  // on the "+" button surfaces up to `depth` levels of real content.
+  // Collapsing reverses both the manual override and that fresh budget.
   const handleToggleCollapse = (path: JSONPath) => {
     const key = JSON.stringify(path);
-    setManualOverrides(prev => ({ ...prev, [key]: !collapsedPaths.includes(key) }));
+    const expand = collapsedPaths.includes(key);
+
+    setManualOverrides(prev => ({ ...prev, [key]: !expand }));
+    setExpandedRoots(prev => {
+      const next = new Set(prev);
+      if (expand) next.add(key);
+      else next.delete(key);
+      return next;
+    });
   };
 
   return (
