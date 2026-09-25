@@ -34,13 +34,22 @@ body {
   font-size: 13px;
 }
 
-.toolbar select {
+.toolbar select,
+.toolbar input {
   margin-left: 6px;
   background: #1b1e24;
   color: inherit;
   border: 1px solid #2a2d36;
   border-radius: 4px;
   padding: 2px 6px;
+}
+
+.toolbar label + label {
+  margin-left: 14px;
+}
+
+.toolbar input[type="number"] {
+  width: 48px;
 }
 
 .editor {
