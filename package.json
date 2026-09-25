@@ -1,5 +1,5 @@
 {
-  "name": "jsoncrack-core",
+  "name": "YAML-JSON-Visualizer",
   "private": true,
   "version": "1.0.0",
   "description": "Standalone YAML/JSON to interactive graph visualizer, extracted from jsoncrack.com",

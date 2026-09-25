@@ -1,14 +1,11 @@
-# jsoncrack-core
+# YAML/JSON Visualization
 
-A standalone extraction of jsoncrack.com's YAML/JSON → interactive graph
-visualization. This folder is self-contained — it is **not** part of the
-repo's pnpm workspace and can be copied elsewhere and run with plain npm.
+An interactive graph visualization for YAML or JSON files.
 
 ## What's here
 
 - `src/parseInput.ts` — converts a YAML or JSON string into a plain JS
-  object (`js-yaml` for YAML, `jsonc-parser` for JSON), mirroring the logic
-  in `apps/www/src/lib/utils/jsonAdapter.ts`.
+  object (`js-yaml` for YAML, `jsonc-parser` for JSON)
 - `src/App.tsx` — a minimal editor + `<JSONCrack />` component from the
   published [`jsoncrack-react`](https://www.npmjs.com/package/jsoncrack-react)
   package, which handles the actual graph parsing/layout/rendering.
